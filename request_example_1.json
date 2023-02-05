@@ -1,0 +1,18 @@
+curl -X POST http://localhost:8083/connectors -H 'Content-Type: application/json' -d '
+{ 
+    "name": "mqtt-source-connector-json-true", 
+    "config": 
+    { 
+        "connector.class":"io.confluent.connect.mqtt.MqttSourceConnector", 
+        "mqtt.topics":"swd/iot/power_plant/weather", 
+        "kafka.topic":"kafka-source-topic-json", 
+        "mqtt.clientID":"kafka-source-mqtt", 
+        "mqtt.server.uri":"tcp://192.168.11.29:1883", 
+        "key.converter":"org.apache.kafka.connect.storage.StringConverter", 
+        "key.converter.schemas.enable":"true", 
+        "value.converter":"org.apache.kafka.connect.json.JsonConverter", 
+        "value.converter.schemas.enable":"true", 
+        "confluent.topic.bootstrap.servers":"kafka:9092",
+        "confluent.topic.replication.factor":"1"
+    }
+}'
